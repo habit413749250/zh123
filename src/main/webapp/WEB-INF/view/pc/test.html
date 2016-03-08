@@ -1,0 +1,70 @@
+<html>
+  <head>
+<link rel="stylesheet" href="../js/drp.css" type="text/css"></link>
+  <script type="text/javascript" src="../js/echarts.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.7.js"></script>
+   <title>ECharts</title>
+  <head>
+   <script type="text/javascript">
+   	var dataArr;
+   	var dataArrs;
+	
+   	var datas;
+   	function onloadzx(){
+   			dataArr=new Array();
+  	 		dataArrs=new Array();
+  	 		datas=new Array();
+	 		datas[0] = [2,3,7,5,4,3,9];
+	 		datas[1] = [5,6,6,8,9,7,9];
+	 		datas[2] = [7,9,9,7,9,5,6];
+	 		datas[3] = [4,9,1,5,3,8,2];
+	 		datas[4] = [6,7,5,3,6,4,8];
+     		//比如成功5天
+  			for(var i=0;i<5;i++){
+  					dataArr[i] = "测试" + i;//标题
+					dataArrs[i] ={'name':'测试' +i ,'type':'line','data':datas[i] ,'markPoint' : {'data' : [{'type' : 'max', 'name': '最大值'},{'type' : 'min', 'name': '最小值'}] } };
+					//这里2个name 要对应上
+				   }
+     		onloadzxLine();
+     	}
+
+   require.config({
+       paths:{ 
+    	   echarts: 'js'
+       }
+   });
+   function onloadzxLine(){
+   	require(
+           [
+               'echarts',
+               'echarts/chart/line'   // 使用柱状图就加载bar模块，按需加载
+           ],
+           function (ec) {
+               // 基于准备好的dom，初始化echarts图表
+               var myChart = ec.init(document.getElementById('main')); 
+               var option = {
+                   tooltip: {show: true },
+                   legend: {  data:dataArr },//修改处 --标题
+                   xAxis : [
+                       {
+                           type : 'category',
+                           data : ['ia','ib','ic','ua','ub','uc','ww']
+                       }
+                   ],
+                   yAxis : [{type : 'value'} ],
+                   series : "asd"//随便填
+               };
+       
+               // 为echarts对象加载数据 
+   			option.legend.data=dataArr;
+			option.series=dataArrs;
+            myChart.setOption(option); 
+           }
+       );
+   }
+   </script>
+   </head>
+   <body  onload="onloadzx()">
+   <div id="main" style="height:600px"></div>
+   </body>
+   </html>

@@ -1,0 +1,68 @@
+﻿	function aaa(){
+			//模块名称
+			if($("#name").val()==""){
+				$("#nameyz").html("不能为空!");
+				return;
+			}
+			else{
+				$("#nameyz").html("");
+			}
+			//模块URL
+			if($("#super").val()=="||1111"){
+				if($("#url").val()!=""){
+					$("#urlyz").html("当前为父模块不能有链接");
+					return;
+				}
+				else{
+					$("#urlyz").html("");
+				}
+			}
+			else{
+				if($("#url").val()==""){
+					$("#urlyz").html("链接不能为空");
+					return;
+				}
+				else{
+					$("#urlyz").html("");
+				}
+			}
+			//模块备注
+			if($("#mark").val()==""){
+				$("#markyz").html("不能为空!");
+				return ;
+			}
+			else{
+				$("#markyz").html("");
+			}
+			document.forms[0].submit();
+}
+
+
+$(function(){
+		//模块名称
+		$("#name").blur(function(){
+			if($("#name").val()==""){
+				$("#nameyz").html("不能为空!");
+			}
+			else{
+				$("#nameyz").html("");
+			}
+			})
+			//url
+			$("#url").blur(function(){
+				if($("#super").val()!="||1111")
+				{
+					if($("#url").val()=="")
+					{
+						$("#urlyz").html("不是父模块，不能为空!");
+						return;
+					}
+					else{
+						$("#urlyz").html("");
+					}
+				}
+				else{
+					$("#urlyz").html("");
+				}
+			})
+})

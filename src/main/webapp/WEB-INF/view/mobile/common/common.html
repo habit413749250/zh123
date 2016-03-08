@@ -1,0 +1,36 @@
+<#setting number_format="0.##">
+<#assign CONTEXT_PATH = request.contextPath+"/">
+
+<#macro subStr str len>
+<#if str??><#t>
+	<#if (str?length <= len)><#t>
+	${str}<#t>
+	<#else><#t>
+	${str[0..len-2]}...<#t>
+	</#if><#t>
+</#if><#t>
+</#macro>
+
+<#--显示用户登录名-->
+<#macro showMember>
+	<#if memberJson??>
+		<#assign _m = memberJson?eval />
+		<#t>
+			<#if (_m['nickName']?length > 0)>
+				<#t><@subStr str=_m['nickName'] len=7/><#t>
+			<#elseif (_m['mobile']?length > 0)>
+				<#t>${_m['mobile']?substring(0,3)}****${_m['mobile']?substring(7,11)}<#t>
+			<#elseif (_m['loginName']?length > 0)>
+				<#if (_m['loginName']?index_of('_QQ_') != -1)>
+					<#t>${_m['loginName']?substring(7,10)}***<#t>
+				<#else>
+					<#t>${_m['loginName']}<#t>
+				</#if>
+			</#if>
+		<#t>
+	</#if>
+</#macro>
+
+
+
+
